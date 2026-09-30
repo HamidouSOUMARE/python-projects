@@ -12,4 +12,4 @@ python main.py
 
 ## Choix techniques
 
-_A completer._
+Aucune installation nécessaire hormis python. Pour lancer le programme sur mac la commande est "python3 main.py" et sur windows "python main.py"
