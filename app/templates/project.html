@@ -43,10 +43,12 @@
         {{ brief.context_md | md | safe }}
         <div class="card__eyebrow" style="margin-top: var(--space-4)">Besoin exprime</div>
         {{ brief.need_md | md | safe }}
-        <div class="card__eyebrow" style="margin-top: var(--space-4)">Contraintes</div>
-        <ul class="feedback-list">
-          {% for item in brief.constraints %}<li>{{ item }}</li>{% endfor %}
-        </ul>
+        {% if brief.constraints %}
+          <div class="card__eyebrow" style="margin-top: var(--space-4)">Contraintes</div>
+          <ul class="feedback-list">
+            {% for item in brief.constraints %}<li>{{ item }}</li>{% endfor %}
+          </ul>
+        {% endif %}
         <p class="muted">
           Les criteres d'acceptation du client restent volontairement caches : c'est ta
           reformulation qui doit les faire apparaitre.

@@ -31,6 +31,57 @@ from app.prompts import (
 #: Budget de sortie par type d'appel. La notation est la plus verbeuse.
 MAX_TOKENS = {"brief": 2000, "understanding": 2000, "hint": 1200, "grade": 4000}
 
+#: Champs sans lesquels un brief n'a pas de sens.
+BRIEF_ESSENTIALS = ("client_name", "context_md", "need_md")
+
+
+def normalize_brief(payload: dict[str, Any]) -> dict[str, Any]:
+    """Assainit un brief renvoye par le modele.
+
+    Le champ `required` d'un schema d'outil n'est pas une garantie dure : le modele
+    omet parfois une cle facultative. La sortie du modele est donc traitee comme une
+    entree externe. Ce qui est essentiel est exige, le reste recoit un defaut sur.
+    """
+    missing = [key for key in BRIEF_ESSENTIALS if not str(payload.get(key, "")).strip()]
+    if missing:
+        raise CoachError(
+            f"Le brief genere est incomplet (manque : {', '.join(missing)}). Reessaie."
+        )
+
+    raw_acceptance = payload.get("acceptance")
+    items = raw_acceptance if isinstance(raw_acceptance, list) else []
+    acceptance: list[dict[str, Any]] = []
+    for index, item in enumerate(items, start=1):
+        if not isinstance(item, dict):
+            continue
+        label = str(item.get("label", "")).strip()
+        if not label:
+            continue  # un critere sans enonce ne peut ni etre juge ni etre affiche
+        acceptance.append(
+            {
+                "id": str(item.get("id") or f"ac{index}"),
+                "label": label,
+                "critical": bool(item.get("critical", False)),
+            }
+        )
+    if not acceptance:
+        raise CoachError("Le brief genere n'a aucun critere d'acceptation. Reessaie.")
+
+    raw_constraints = payload.get("constraints")
+    constraints = (
+        [str(item).strip() for item in raw_constraints if str(item).strip()]
+        if isinstance(raw_constraints, list)
+        else []
+    )
+
+    return {
+        "client_name": str(payload["client_name"]).strip(),
+        "context_md": str(payload["context_md"]).strip(),
+        "need_md": str(payload["need_md"]).strip(),
+        "constraints": constraints,
+        "acceptance": acceptance,
+    }
+
 
 class CoachProtocol(Protocol):
     """Contrat attendu par la couche service.
@@ -131,9 +182,7 @@ class Coach:
             BRIEF_TOOL,
             "brief",
         )
-        if not payload.get("acceptance"):
-            raise CoachError("Le brief genere n'a aucun critere d'acceptation. Reessaie.")
-        return payload
+        return normalize_brief(payload)
 
     def review_understanding(
         self, brief_block: str, understanding: str, attempt_no: int

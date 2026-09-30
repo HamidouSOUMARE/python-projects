@@ -142,20 +142,25 @@ def brief_markdown(project: dict[str, Any], brief: dict[str, Any]) -> str:
     Les criteres d'acceptation en sont volontairement absents : ils servent a
     juger la comprehension, les reveler viderait l'exercice de son sens.
     """
-    constraints = "\n".join(f"- {item}" for item in brief["constraints"])
-    return (
-        f"# Jour {project['day']:02d} - {project['title']}\n\n"
-        f"**Client :** {brief['client_name']}\n\n"
-        f"## Contexte\n\n{brief['context_md']}\n\n"
-        f"## Besoin\n\n{brief['need_md']}\n\n"
-        f"## Contraintes\n\n{constraints}\n\n"
-        f"---\n_Sujet d'origine : {project['source_url']}_\n"
-    )
+    sections = [
+        f"# Jour {project['day']:02d} - {project['title']}",
+        f"**Client :** {brief['client_name']}",
+        f"## Contexte\n\n{brief['context_md']}",
+        f"## Besoin\n\n{brief['need_md']}",
+    ]
+    if brief["constraints"]:
+        listing = "\n".join(f"- {item}" for item in brief["constraints"])
+        sections.append(f"## Contraintes\n\n{listing}")
+    sections.append(f"---\n_Sujet d'origine : {project['source_url']}_")
+    return "\n\n".join(sections) + "\n"
 
 
 def brief_block(brief: dict[str, Any]) -> str:
     """Bloc de contexte envoye au modele : inclut les criteres caches."""
-    constraints = "\n".join(f"- {item}" for item in brief["constraints"])
+    constraints = (
+        "\n".join(f"- {item}" for item in brief["constraints"])
+        or "- Aucune contrainte particuliere exprimee."
+    )
     acceptance = "\n".join(
         f"- [{item['id']}]{' (critique)' if item.get('critical') else ''} {item['label']}"
         for item in brief["acceptance"]

@@ -4,9 +4,10 @@ from __future__ import annotations
 
 from functools import lru_cache
 from pathlib import Path
+from typing import Annotated
 
 from pydantic import Field, field_validator
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 ROOT = Path(__file__).resolve().parent.parent
 DATA_DIR = ROOT / "data"
@@ -21,7 +22,9 @@ class Settings(BaseSettings):
     anthropic_api_key: str = ""
     coach_model: str = "claude-sonnet-5"
     pass_threshold: float = Field(default=14.0, ge=0.0, le=20.0)
-    hint_penalties: tuple[float, float, float] = (0.5, 1.0, 2.0)
+    # NoDecode empeche pydantic-settings de tenter un json.loads sur la valeur brute :
+    # sans lui, la forme "0.5,1.0,2.0" du .env echoue avant meme le validateur.
+    hint_penalties: Annotated[tuple[float, float, float], NoDecode] = (0.5, 1.0, 2.0)
     git_remote: str = ""
     git_branch: str = "main"
 
