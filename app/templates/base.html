@@ -13,13 +13,14 @@
       <a class="brand" href="/">Coach Python</a>
       <nav class="nav" aria-label="Navigation principale">
         <a href="/">Tableau de bord</a>
+        <a href="/libre">Mode libre</a>
         <a href="/catalogue">Catalogue</a>
       </nav>
     </div>
   </header>
 
   <main class="layout">
-    {% if not llm_ready %}
+    {% if needs_llm | default(true) and not llm_ready %}
       <div class="flash flash--error" role="alert">
         Aucune cle API Anthropic detectee. Copie <code>.env.example</code> vers <code>.env</code>
         et renseigne <code>ANTHROPIC_API_KEY</code> : sans elle, le client ne peut ni valider ta

@@ -162,3 +162,125 @@ def test_sans_cle_api_les_actions_sont_desactivees(
 
     assert "Aucune cle API Anthropic detectee" in response.text
     assert "disabled" in response.text
+
+
+# --------------------------------------------------------------------------- #
+# Mode libre : aucun appel a l'API
+# --------------------------------------------------------------------------- #
+
+
+def test_le_mode_libre_liste_les_projets(client: TestClient) -> None:
+    response = client.get("/libre")
+    assert response.status_code == 200
+    assert "Mode libre" in response.text
+    assert "Compteur de mots" in response.text
+
+
+def test_la_page_libre_propose_d_ouvrir_le_dossier(client: TestClient) -> None:
+    response = client.get("/libre/1")
+    assert response.status_code == 200
+    assert "Ouvrir le dossier" in response.text
+    assert "Lancer le programme" not in response.text
+
+
+def test_un_projet_libre_inconnu_rend_une_erreur(client: TestClient) -> None:
+    assert client.get("/libre/999").status_code == 404
+
+
+def test_ouvrir_le_dossier_pose_le_squelette(client: TestClient, projects_dir: Path) -> None:
+    client.post("/libre/1/dossier")
+    directory = projects_dir / "day-01-hello-world"
+
+    assert (directory / "main.py").is_file()
+    assert (directory / "README.md").is_file()
+    # Le mode libre ne passe pas par le client : pas de brief.
+    assert not (directory / "BRIEF.md").exists()
+
+    page = client.get("/libre/1")
+    assert "Lancer le programme" in page.text
+    assert "main.py" in page.text
+
+
+def test_lancer_le_squelette_affiche_sa_sortie(client: TestClient) -> None:
+    client.post("/libre/1/dossier")
+    response = client.post("/libre/1/executer", data={"entrypoint": "main.py"})
+
+    assert response.status_code == 200
+    assert "termine correctement" in response.text
+    assert "a toi de jouer" in response.text
+
+
+def test_lancer_un_script_casse_affiche_la_trace(client: TestClient, projects_dir: Path) -> None:
+    client.post("/libre/1/dossier")
+    (projects_dir / "day-01-hello-world" / "main.py").write_text(
+        "raise ValueError('cassé')\n", encoding="utf-8"
+    )
+    response = client.post("/libre/1/executer", data={"entrypoint": "main.py"})
+
+    assert "erreur" in response.text
+    assert "ValueError" in response.text
+
+
+def test_les_arguments_saisis_sont_conserves_dans_le_formulaire(
+    client: TestClient, projects_dir: Path
+) -> None:
+    client.post("/libre/1/dossier")
+    (projects_dir / "day-01-hello-world" / "main.py").write_text(
+        "import sys\nprint(sys.argv[1:])\n", encoding="utf-8"
+    )
+    response = client.post(
+        "/libre/1/executer", data={"entrypoint": "main.py", "args": "fichier.txt 3"}
+    )
+
+    assert "fichier.txt" in response.text
+    # Les arguments restent dans le champ : pas besoin de les retaper a chaque essai.
+    assert 'value="fichier.txt 3"' in response.text
+
+
+def test_la_sortie_du_programme_est_echappee(client: TestClient, projects_dir: Path) -> None:
+    """Ce que le programme affiche est du texte, jamais du HTML execute."""
+    client.post("/libre/1/dossier")
+    (projects_dir / "day-01-hello-world" / "main.py").write_text(
+        "print('<script>alert(1)</script>')\n", encoding="utf-8"
+    )
+    response = client.post("/libre/1/executer", data={"entrypoint": "main.py"})
+
+    assert "<script>alert(1)</script>" not in response.text
+    assert "&lt;script&gt;" in response.text
+
+
+def test_l_entree_standard_est_transmise(client: TestClient, projects_dir: Path) -> None:
+    client.post("/libre/1/dossier")
+    (projects_dir / "day-01-hello-world" / "main.py").write_text(
+        "print(f'salut {input()}')\n", encoding="utf-8"
+    )
+    response = client.post("/libre/1/executer", data={"entrypoint": "main.py", "stdin": "Hamidou"})
+    assert "salut Hamidou" in response.text
+
+
+def test_lancer_les_tests_sans_test_donne_une_consigne(client: TestClient) -> None:
+    client.post("/libre/1/dossier")
+    response = client.post("/libre/1/tests", data={"entrypoint": "main.py"})
+    assert "flash--error" in response.text
+    assert "test_quelquechose.py" in response.text
+
+
+def test_le_mode_libre_n_exige_pas_de_cle_api(
+    db_path: Path, projects_dir: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    """Le bandeau d'avertissement n'a pas lieu d'etre : ce mode n'appelle rien."""
+    monkeypatch.setattr(main, "get_settings", lambda: Settings(anthropic_api_key=""))
+    app.dependency_overrides[get_connection] = _connection_factory(db_path)
+    try:
+        client = TestClient(app)
+        liste = client.get("/libre")
+        client.post("/libre/1/dossier")
+        page = client.get("/libre/1")
+        execution = client.post("/libre/1/executer", data={"entrypoint": "main.py"})
+    finally:
+        app.dependency_overrides.clear()
+
+    assert "Aucune cle API Anthropic detectee" not in liste.text
+    assert "Aucune cle API Anthropic detectee" not in page.text
+    assert "disabled" not in page.text
+    assert "a toi de jouer" in execution.text

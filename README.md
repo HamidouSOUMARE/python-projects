@@ -7,7 +7,21 @@ L'app prend les 101 projets de
 et les transforme en missions client. Le sujet n'est jamais donne comme un exercice : un
 client decrit un probleme metier, et c'est a toi de faire apparaitre le besoin reel.
 
-## La boucle
+## Deux modes
+
+**Mode libre** (`/libre`) — le sujet, ton code, un bouton pour lancer. Tu choisis un projet,
+l'app cree le dossier avec un `main.py` de depart, tu codes dans ton editeur, puis tu lances
+le programme (avec arguments et entree standard si besoin) ou tes tests depuis la page. La
+sortie s'affiche telle quelle. **Aucun appel a l'API, aucune cle necessaire.**
+
+**Mode coache** (`/projet/{id}`) — la boucle complete ci-dessous : un client formule un besoin,
+valide ta comprehension avant que tu codes, puis note ton rendu et te donne des axes. Necessite
+une cle API.
+
+Les deux modes partagent le meme dossier `projects/day-NN-slug/` : commencer en libre puis
+passer en coache sur le meme projet ne perd rien.
+
+## La boucle du mode coache
 
 ```
 1. BRIEF          Le client depose son besoin. Aucune indication technique.
@@ -101,6 +115,7 @@ python scripts/build_catalog.py         # reconstruire data/catalog.json depuis 
 app/
   config.py      Reglages (env / .env), chemins
   models.py      Etats, transitions autorisees, grille de criteres
+  runner.py      Execution du code en mode libre (sous-processus, sans shell)
   db.py          SQLite : connexion, schema, amorcage du catalogue
   schema.sql     Schema
   prompts.py     Les 4 prompts et leurs schemas d'outils

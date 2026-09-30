@@ -64,6 +64,36 @@ def ensure_project_dir(day: int, slug: str, title: str, brief_md: str) -> Path:
     return directory
 
 
+def ensure_free_workspace(day: int, slug: str, title: str, source_url: str) -> Path:
+    """Ouvre le dossier d'un projet en mode libre : sujet, squelette, rien de plus.
+
+    Aucun BRIEF.md ici - le mode libre ne passe pas par le client. Rien n'est
+    jamais ecrase : le squelette n'est pose que si le fichier n'existe pas.
+    """
+    directory = project_dir(day, slug)
+    directory.mkdir(parents=True, exist_ok=True)
+
+    readme = directory / "README.md"
+    if not readme.exists():
+        readme.write_text(
+            f"# Jour {day:02d} - {title}\n\n"
+            f"## Sujet\n\n{title}\n\nEnonce d'origine : {source_url}\n\n"
+            "## Utilisation\n\n```bash\npython main.py\n```\n\n"
+            "## Ce que j'ai appris\n\n_A completer._\n",
+            encoding="utf-8",
+        )
+
+    entrypoint = directory / "main.py"
+    if not entrypoint.exists():
+        entrypoint.write_text(
+            f'"""Jour {day:02d} - {title}."""\n\n\ndef main() -> None:\n'
+            '    print("a toi de jouer")\n\n\n'
+            'if __name__ == "__main__":\n    main()\n',
+            encoding="utf-8",
+        )
+    return directory
+
+
 def _is_ignored(path: Path, root: Path) -> bool:
     return any(part in IGNORED_DIRS for part in path.relative_to(root).parts[:-1])
 

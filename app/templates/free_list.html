@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}Mode libre - Coach Python{% endblock %}
+
+{% block content %}
+<div class="stack">
+  <div>
+    <h1>Mode libre</h1>
+    <p class="muted">
+      Le sujet, ton code, un bouton pour lancer. Pas de brief client, pas de note,
+      aucun appel a l'API. Prends le projet qui te fait envie.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Jour</th><th>Projet</th><th>Theme</th><th>Niveau</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for project in projects %}
+            <tr>
+              <td>{{ '%02d' % project.day }}</td>
+              <td class="wrap"><a href="/libre/{{ project.id }}">{{ project.title }}</a></td>
+              <td>{{ project.theme }}</td>
+              <td>{{ project.difficulty }}/4</td>
+              <td><a href="/libre/{{ project.id }}">coder</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

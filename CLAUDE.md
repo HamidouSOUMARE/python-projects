@@ -15,6 +15,26 @@ Seul `BRIEF.md` est ecrit par l'app dans ces dossiers (reecrit a chaque validati
 que `REVIEW-vN.md` (une par version notee). `README.md` d'un projet appartient a
 l'utilisateur : il est cree vide une fois, jamais ecrase.
 
+## Les deux modes
+
+`/libre` (mode libre) n'appelle jamais l'API : sujet, squelette, execution, tests. `/projet/{id}`
+(mode coache) fait la boucle complete avec le client. Les deux ecrivent dans le meme dossier
+`projects/day-NN-slug/`. Une page du mode libre passe `needs_llm=False` : le bandeau
+d'avertissement sur la cle API ne doit pas y apparaitre.
+
+## Execution du code de l'utilisateur (`runner.py`)
+
+- Jamais de shell. Les arguments passent par `shlex.split` puis une liste `argv`, ce qui rend
+  `; rm ...` inoffensif. Un test verrouille ce comportement.
+- `child_env()` retire les variables du coach (`ANTHROPIC_*`, `COACH_*`, ...) : le code d'un
+  exercice ne doit jamais voir la cle API.
+- Le point d'entree est un nom de fichier `.py` du dossier du projet, jamais un chemin : pas de
+  remontee d'arborescence.
+- Timeout obligatoire, sortie tronquee. Un plantage du code de l'utilisateur n'est pas une
+  erreur de l'app : il remonte dans `RunResult.stderr`, pas en exception.
+- Les routes du mode libre rendent la page directement au lieu de rediriger : la sortie doit
+  rester visible, et rejouer un lancement local ne coute rien (contrairement au mode coache).
+
 ## Regles d'architecture
 
 - Toute transition d'etat passe par `service._set_status`, qui verifie

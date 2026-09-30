@@ -32,6 +32,10 @@ packages = ["app"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+# projects/ contient les exercices de l'utilisateur : c'est la matiere notee.
+# Ni le formateur ni le linter ne doivent y toucher - corriger son style a sa
+# place fausserait la notation et effacerait son travail.
+extend-exclude = ["projects"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "SIM", "RET", "ARG", "PTH"]
@@ -42,6 +46,8 @@ strict = true
 warn_return_any = true
 disallow_untyped_defs = true
 ignore_missing_imports = true
+# Meme raison que pour ruff : les exercices ne sont pas du code de l'app.
+exclude = ['^projects/']
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

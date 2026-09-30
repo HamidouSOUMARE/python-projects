@@ -294,7 +294,9 @@ pre code {
 
 /* --- Formulaires --- */
 
-textarea {
+textarea,
+select,
+input[type="text"] {
   width: 100%;
   font: inherit;
   font-size: var(--text-sm);
@@ -303,9 +305,22 @@ textarea {
   background: var(--color-bg);
   border: var(--border-width) solid var(--color-border-strong);
   border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+}
+
+textarea {
   padding: var(--space-4);
   resize: vertical;
   min-height: 12rem;
+}
+
+textarea.compact {
+  min-height: 5rem;
+  font-family: var(--font-mono);
+}
+
+input[type="text"] {
+  font-family: var(--font-mono);
 }
 
 .field__hint {
@@ -586,6 +601,23 @@ td.wrap {
 
 tr:hover td {
   background: var(--color-surface-sunken);
+}
+
+/* --- Sortie d'execution (mode libre) --- */
+
+.output {
+  margin: 0;
+  max-height: 24rem;
+  overflow: auto;
+  font-size: var(--text-sm);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.output--error {
+  border-color: var(--color-danger);
+  background: var(--color-danger-soft);
+  color: var(--color-danger);
 }
 
 /* --- Divers --- */

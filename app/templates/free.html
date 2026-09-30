@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+{% block title %}Jour {{ '%02d' % project.day }} - {{ project.title }} (libre){% endblock %}
+
+{% block content %}
+<div class="stack">
+
+  <div>
+    <p class="muted" style="margin-bottom: var(--space-1)">
+      <a href="/libre">Mode libre</a> / jour {{ '%02d' % project.day }}
+    </p>
+    <h1>{{ project.title }}</h1>
+    <div class="cluster">
+      <span class="badge badge--accent">{{ project.theme }}</span>
+      <span class="badge">difficulte {{ project.difficulty }}/4</span>
+      <a class="badge" href="{{ project.source_url }}" target="_blank" rel="noopener">
+        enonce d'origine
+      </a>
+    </div>
+  </div>
+
+  <section class="card">
+    <div class="card__eyebrow">Le sujet</div>
+    <h2 style="margin-bottom: var(--space-3)">{{ project.title }}</h2>
+    <p class="muted">
+      A toi de decider ce que ca veut dire concretement, puis de le coder. L'enonce
+      d'origine est <a href="{{ project.source_url }}" target="_blank" rel="noopener">ici</a>
+      si tu veux comparer ton approche a celle du depot source - mais lis-le apres avoir
+      essaye, sinon tu te prives du plus utile.
+    </p>
+    <hr class="divider">
+    <p class="muted" style="margin: 0">
+      Tu veux la version exigeante, avec un client qui formule un besoin, valide ta
+      comprehension et note ton code ?
+      <a href="/projet/{{ project.id }}">Passer en mode coache</a>.
+    </p>
+  </section>
+
+  {% if not opened %}
+    <section class="card card--accent">
+      <div class="card__eyebrow">Etape 1</div>
+      <h2>Ouvrir le dossier de travail</h2>
+      <p class="muted">
+        Je cree <span class="path">{{ directory }}</span> avec un <code>README.md</code> et un
+        <code>main.py</code> de depart. Rien n'est jamais ecrase.
+      </p>
+      <form method="post" action="/libre/{{ project.id }}/dossier">
+        <button class="button" type="submit">Ouvrir le dossier</button>
+      </form>
+    </section>
+
+  {% else %}
+    <section class="card">
+      <div class="card__eyebrow">Ton code</div>
+      <p><span class="path">{{ directory }}</span></p>
+      {% if files %}
+        <div class="cluster">
+          {% for source in files %}<span class="badge">{{ source.path }}</span>{% endfor %}
+        </div>
+      {% else %}
+        <p class="muted">Aucun fichier pour l'instant.</p>
+      {% endif %}
+    </section>
+
+    <section class="card card--accent">
+      <div class="card__eyebrow">Lancer</div>
+      <form method="post" action="/libre/{{ project.id }}/executer" class="stack">
+        <div class="two-col">
+          <div>
+            <label class="field__hint" for="entrypoint">Fichier a lancer</label>
+            {% if entrypoints %}
+              <select id="entrypoint" name="entrypoint">
+                {% for name in entrypoints %}
+                  <option value="{{ name }}" {{ 'selected' if name == form.entrypoint }}>
+                    {{ name }}
+                  </option>
+                {% endfor %}
+              </select>
+            {% else %}
+              <p class="muted">Aucun script Python dans le dossier.</p>
+              <input type="hidden" name="entrypoint" value="main.py">
+            {% endif %}
+          </div>
+          <div>
+            <label class="field__hint" for="args">
+              Arguments de la ligne de commande <span class="muted">(optionnel)</span>
+            </label>
+            <input type="text" id="args" name="args" value="{{ form.args }}"
+                   placeholder="avis.txt 10">
+          </div>
+        </div>
+
+        <div>
+          <label class="field__hint" for="stdin">
+            Entree standard <span class="muted">(optionnel, si ton programme demande une saisie)</span>
+          </label>
+          <textarea id="stdin" name="stdin" class="compact"
+                    placeholder="une ligne par saisie attendue">{{ form.stdin }}</textarea>
+        </div>
+
+        <div class="cluster">
+          <button class="button" type="submit" {{ 'disabled' if not entrypoints }}>
+            Lancer le programme
+          </button>
+          <button class="button button--ghost" type="submit"
+                  formaction="/libre/{{ project.id }}/tests">
+            Lancer les tests
+          </button>
+          {% if not tests_present %}
+            <span class="muted">Aucun test detecte : cree un <code>test_*.py</code>.</span>
+          {% endif %}
+        </div>
+      </form>
+    </section>
+
+    {% if run_error %}
+      <div class="flash flash--error" role="alert">{{ run_error }}</div>
+    {% endif %}
+
+    {% if run %}
+      <section class="card {{ 'card--accent' if run.ok }}">
+        <div class="card__eyebrow">Resultat</div>
+        <div class="cluster">
+          {% if run.timed_out %}
+            <span class="badge badge--danger">interrompu apres {{ run.duration_ms }} ms</span>
+            <span class="muted">Le programme ne rendait pas la main : boucle infinie, ou
+              attente d'une saisie que tu n'as pas fournie ?</span>
+          {% elif run.ok %}
+            <span class="badge badge--success">termine correctement</span>
+            <span class="badge">code de sortie 0</span>
+            <span class="badge">{{ run.duration_ms }} ms</span>
+          {% else %}
+            <span class="badge badge--danger">erreur</span>
+            <span class="badge">code de sortie {{ run.returncode }}</span>
+            <span class="badge">{{ run.duration_ms }} ms</span>
+          {% endif %}
+        </div>
+        <p class="muted" style="margin-top: var(--space-3)">
+          <code>{{ run_label }}</code>
+        </p>
+
+        {% if run.stdout %}
+          <div class="card__eyebrow" style="margin-top: var(--space-4)">Sortie</div>
+          <pre class="output"><code>{{ run.stdout }}</code></pre>
+        {% endif %}
+
+        {% if run.stderr %}
+          <div class="card__eyebrow" style="margin-top: var(--space-4)">
+            Erreurs {% if run.ok %}<span class="muted">(le programme a quand meme reussi)</span>{% endif %}
+          </div>
+          <pre class="output output--error"><code>{{ run.stderr }}</code></pre>
+        {% endif %}
+
+        {% if run.silent %}
+          <p class="muted" style="margin-top: var(--space-4)">
+            Le programme n'a rien affiche. Il a peut-etre besoin d'un
+            <code>print()</code>, ou d'arguments.
+          </p>
+        {% endif %}
+      </section>
+    {% endif %}
+  {% endif %}
+
+</div>
+{% endblock %}
