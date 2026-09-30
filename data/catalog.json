@@ -1,0 +1,911 @@
+[
+  {
+    "slug": "hello-world",
+    "title": "Hello World",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Hello",
+    "theme": "divers",
+    "difficulty": 1,
+    "source_rank": 1,
+    "day": 1
+  },
+  {
+    "slug": "random-password-generator",
+    "title": "Random Password Generator",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Random_password_generator",
+    "theme": "securite",
+    "difficulty": 1,
+    "source_rank": 3,
+    "day": 2
+  },
+  {
+    "slug": "search-string-in-files",
+    "title": "Search string in Files",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/String_search_from_multiple_files",
+    "theme": "fichiers",
+    "difficulty": 1,
+    "source_rank": 5,
+    "day": 3
+  },
+  {
+    "slug": "fetch-links-from-webpage",
+    "title": "Fetch links from Webpage",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/All_links_from_given_webpage",
+    "theme": "web",
+    "difficulty": 1,
+    "source_rank": 6,
+    "day": 4
+  },
+  {
+    "slug": "random-word-from-file",
+    "title": "Random word from file",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Random_word_from_list",
+    "theme": "fichiers",
+    "difficulty": 1,
+    "source_rank": 12,
+    "day": 5
+  },
+  {
+    "slug": "calculate-age",
+    "title": "Calculate age",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Calculate_age",
+    "theme": "donnees",
+    "difficulty": 1,
+    "source_rank": 14,
+    "day": 6
+  },
+  {
+    "slug": "generate-image-snipets",
+    "title": "Generate image snipets",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Py_carbon_clips",
+    "theme": "media",
+    "difficulty": 1,
+    "source_rank": 16,
+    "day": 7
+  },
+  {
+    "slug": "get-meta-information-of-images",
+    "title": "Get meta information of images",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Get_meta_information_of_images",
+    "theme": "media",
+    "difficulty": 1,
+    "source_rank": 21,
+    "day": 8
+  },
+  {
+    "slug": "fetch-wifi-saved-password-windows",
+    "title": "Fetch Wifi Saved Password Windows",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Get_wifi_password",
+    "theme": "securite",
+    "difficulty": 1,
+    "source_rank": 23,
+    "day": 9
+  },
+  {
+    "slug": "create-password-hash",
+    "title": "Create password hash",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Hashing_passwords",
+    "theme": "securite",
+    "difficulty": 1,
+    "source_rank": 28,
+    "day": 10
+  },
+  {
+    "slug": "decimal-to-binary-and-vice-versa",
+    "title": "Decimal to binary and vice versa",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Decimal_to_binary_convertor_and_vice_versa",
+    "theme": "donnees",
+    "difficulty": 1,
+    "source_rank": 30,
+    "day": 11
+  },
+  {
+    "slug": "currency-convertor-cli-app",
+    "title": "Currency Convertor cli app",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Currency_converter",
+    "theme": "web",
+    "difficulty": 1,
+    "source_rank": 32,
+    "day": 12
+  },
+  {
+    "slug": "xml-to-json-file-convertor",
+    "title": "XML to JSON file Convertor",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Convert_XML_to_JSON",
+    "theme": "fichiers",
+    "difficulty": 1,
+    "source_rank": 35,
+    "day": 13
+  },
+  {
+    "slug": "convert-dictionary-to-python-object",
+    "title": "Convert dictionary to python object",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/convert_dictionary_to_python_object",
+    "theme": "donnees",
+    "difficulty": 1,
+    "source_rank": 38,
+    "day": 14
+  },
+  {
+    "slug": "image-format-conversion",
+    "title": "Image format conversion",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/convert_Imgs",
+    "theme": "media",
+    "difficulty": 1,
+    "source_rank": 43,
+    "day": 15
+  },
+  {
+    "slug": "save-random-article-from-wikipedia",
+    "title": "Save random article from wikipedia",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Random_Wikipedia_Article",
+    "theme": "web",
+    "difficulty": 1,
+    "source_rank": 44,
+    "day": 16
+  },
+  {
+    "slug": "language-translator-using-googletrans",
+    "title": "Language Translator using googletrans",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Language_translator",
+    "theme": "donnees",
+    "difficulty": 1,
+    "source_rank": 50,
+    "day": 17
+  },
+  {
+    "slug": "fetch-unique-words-from-file",
+    "title": "Fetch unique words from file",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Unique_words_in_a_file",
+    "theme": "fichiers",
+    "difficulty": 1,
+    "source_rank": 52,
+    "day": 18
+  },
+  {
+    "slug": "speech-to-text-converter",
+    "title": "Speech to text converter",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Speech_to_text",
+    "theme": "media",
+    "difficulty": 1,
+    "source_rank": 53,
+    "day": 19
+  },
+  {
+    "slug": "set-random-wallpaper",
+    "title": "Set Random Wallpaper",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Write_a_script_to_download_a_random_image_from_unsplash_and_set_it_as_wallpaper",
+    "theme": "donnees",
+    "difficulty": 1,
+    "source_rank": 54,
+    "day": 20
+  },
+  {
+    "slug": "find-dominant-color-from-image",
+    "title": "Find Dominant color from image",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Dominant_color",
+    "theme": "media",
+    "difficulty": 1,
+    "source_rank": 55,
+    "day": 21
+  },
+  {
+    "slug": "convert-numbers-to-words",
+    "title": "Convert Numbers To Words",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Convert_numbers_to_word",
+    "theme": "donnees",
+    "difficulty": 1,
+    "source_rank": 59,
+    "day": 22
+  },
+  {
+    "slug": "recursive-password-generator",
+    "title": "Recursive Password Generator",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Recursive_password_generator",
+    "theme": "securite",
+    "difficulty": 1,
+    "source_rank": 77,
+    "day": 23
+  },
+  {
+    "slug": "cartoonify-an-image",
+    "title": "Cartoonify an Image",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Easy_cartoonify",
+    "theme": "media",
+    "difficulty": 1,
+    "source_rank": 80,
+    "day": 24
+  },
+  {
+    "slug": "generate-wordcloud-from-wikipedia-article",
+    "title": "Generate Wordcloud from Wikipedia Article",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Wikipedia_search_wordcloud",
+    "theme": "web",
+    "difficulty": 1,
+    "source_rank": 84,
+    "day": 25
+  },
+  {
+    "slug": "convert-jpeg-to-png",
+    "title": "Convert JPEG to PNG",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Convert_JPEG_to_PNG",
+    "theme": "donnees",
+    "difficulty": 1,
+    "source_rank": 86,
+    "day": 26
+  },
+  {
+    "slug": "reduce-image-size",
+    "title": "Reduce Image Size",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Reduce_image_file_size",
+    "theme": "media",
+    "difficulty": 1,
+    "source_rank": 92,
+    "day": 27
+  },
+  {
+    "slug": "png-to-ico-converter",
+    "title": "PNG to ICO converter",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/convert_png_images_to_ico_format",
+    "theme": "donnees",
+    "difficulty": 1,
+    "source_rank": 98,
+    "day": 28
+  },
+  {
+    "slug": "countdown-timer",
+    "title": "CountDown Timer",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Countdown_timer",
+    "theme": "donnees",
+    "difficulty": 1,
+    "source_rank": 103,
+    "day": 29
+  },
+  {
+    "slug": "json-to-csv",
+    "title": "JSON to CSV",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Convert_JSON_to_CSV",
+    "theme": "fichiers",
+    "difficulty": 2,
+    "source_rank": 2,
+    "day": 30
+  },
+  {
+    "slug": "instagram-profile-info",
+    "title": "Instagram Profile Info",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Instagram_profile",
+    "theme": "web",
+    "difficulty": 2,
+    "source_rank": 4,
+    "day": 31
+  },
+  {
+    "slug": "split-folders-into-subfolders",
+    "title": "Split Folders into Subfolders",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Split_folder_into_subfolders",
+    "theme": "fichiers",
+    "difficulty": 2,
+    "source_rank": 10,
+    "day": 32
+  },
+  {
+    "slug": "battery-notification",
+    "title": "Battery notification",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Battery_notification",
+    "theme": "automatisation",
+    "difficulty": 2,
+    "source_rank": 13,
+    "day": 33
+  },
+  {
+    "slug": "text-file-analysis",
+    "title": "Text file analysis",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Textfile_analysis",
+    "theme": "fichiers",
+    "difficulty": 2,
+    "source_rank": 15,
+    "day": 34
+  },
+  {
+    "slug": "organize-file-system",
+    "title": "Organize file system",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Organized_download_folder_with_different_categories",
+    "theme": "fichiers",
+    "difficulty": 2,
+    "source_rank": 17,
+    "day": 35
+  },
+  {
+    "slug": "get-ipaddress-and-hostname-of-website",
+    "title": "Get Ipaddress and Hostname of Website",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Find_out_hostname_and_ip_address",
+    "theme": "web",
+    "difficulty": 2,
+    "source_rank": 19,
+    "day": 36
+  },
+  {
+    "slug": "progressbar-using-tqdm",
+    "title": "Progressbar using tqdm",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Terminal_progress_bar_with_images_resizing",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 20,
+    "day": 37
+  },
+  {
+    "slug": "save-screenshot-of-given-website",
+    "title": "Save Screenshot of given Website",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Snapshot_of_given_website",
+    "theme": "media",
+    "difficulty": 2,
+    "source_rank": 24,
+    "day": 38
+  },
+  {
+    "slug": "split-files-using-no-of-lines",
+    "title": "Split files using no of lines",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Split_File",
+    "theme": "fichiers",
+    "difficulty": 2,
+    "source_rank": 25,
+    "day": 39
+  },
+  {
+    "slug": "captures-screenshot-at-regular-interval-of-time",
+    "title": "Captures screenshot at regular interval of time",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/capture_screenshot",
+    "theme": "media",
+    "difficulty": 2,
+    "source_rank": 27,
+    "day": 40
+  },
+  {
+    "slug": "cli-based-todo-application",
+    "title": "Cli Based Todo Application",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Cli_todo",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 31,
+    "day": 41
+  },
+  {
+    "slug": "stopwatch-application",
+    "title": "Stopwatch Application",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Create_a_simple_stopwatch",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 33,
+    "day": 42
+  },
+  {
+    "slug": "cli-proxy-tester",
+    "title": "CLI Proxy Tester",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/cli_proxy_tester",
+    "theme": "web",
+    "difficulty": 2,
+    "source_rank": 34,
+    "day": 43
+  },
+  {
+    "slug": "compress-file-and-folders",
+    "title": "Compress file and folders",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Write_script_to_compress_folder_and_files",
+    "theme": "fichiers",
+    "difficulty": 2,
+    "source_rank": 36,
+    "day": 44
+  },
+  {
+    "slug": "find-imdb-movie-ratings",
+    "title": "Find IMDB movie ratings",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Find_imdb_rating",
+    "theme": "web",
+    "difficulty": 2,
+    "source_rank": 37,
+    "day": 45
+  },
+  {
+    "slug": "move-files-to-alphabetically-arranged-folders",
+    "title": "Move files to alphabetically arranged folders",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Write_script_to_move_files_into_alphabetically_ordered_folder",
+    "theme": "fichiers",
+    "difficulty": 2,
+    "source_rank": 39,
+    "day": 46
+  },
+  {
+    "slug": "website-summerization",
+    "title": "Website Summerization",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Web_page_summation",
+    "theme": "web",
+    "difficulty": 2,
+    "source_rank": 41,
+    "day": 47
+  },
+  {
+    "slug": "text-to-speech-mp3",
+    "title": "Text To speech(mp3)",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Text_to_speech",
+    "theme": "media",
+    "difficulty": 2,
+    "source_rank": 42,
+    "day": 48
+  },
+  {
+    "slug": "check-website-connectivity",
+    "title": "Check website connectivity",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Check_website_connectivity",
+    "theme": "web",
+    "difficulty": 2,
+    "source_rank": 45,
+    "day": 49
+  },
+  {
+    "slug": "fetch-city-weather-information",
+    "title": "Fetch city weather information",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Fetch_current_weather",
+    "theme": "web",
+    "difficulty": 2,
+    "source_rank": 46,
+    "day": 50
+  },
+  {
+    "slug": "calculator-app",
+    "title": "Calculator App",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Create_calculator_app",
+    "theme": "donnees",
+    "difficulty": 2,
+    "source_rank": 47,
+    "day": 51
+  },
+  {
+    "slug": "merge-csv-files",
+    "title": "Merge Csv files",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Merge_csv_files",
+    "theme": "fichiers",
+    "difficulty": 2,
+    "source_rank": 48,
+    "day": 52
+  },
+  {
+    "slug": "fetch-tweets-and-save-in-csv",
+    "title": "Fetch tweets and save in csv",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Fetch_and_store_tweets",
+    "theme": "fichiers",
+    "difficulty": 2,
+    "source_rank": 49,
+    "day": 53
+  },
+  {
+    "slug": "ascii-art",
+    "title": "Ascii art",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Ascii_art",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 56,
+    "day": 54
+  },
+  {
+    "slug": "fetch-open-port",
+    "title": "Fetch Open Port",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Fetch_open_ports",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 58,
+    "day": 55
+  },
+  {
+    "slug": "restart-and-shutdown-system",
+    "title": "Restart and Shutdown System",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Shutdown_or_restart_your_device",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 60,
+    "day": 56
+  },
+  {
+    "slug": "test-internet-connection",
+    "title": "Test Internet Connection",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Internet_connection_check",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 65,
+    "day": 57
+  },
+  {
+    "slug": "website-blocker-and-unblocker",
+    "title": "Website Blocker And Unblocker",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Website_blocker",
+    "theme": "web",
+    "difficulty": 2,
+    "source_rank": 67,
+    "day": 58
+  },
+  {
+    "slug": "fetch-domain-dns-record",
+    "title": "Fetch Domain Dns Record",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Dns_record",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 68,
+    "day": 59
+  },
+  {
+    "slug": "python-auto-draw",
+    "title": "Python-Auto-Draw",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Python_auto_draw",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 69,
+    "day": 60
+  },
+  {
+    "slug": "rock-paper-scissors-game",
+    "title": "Rock Paper Scissors Game",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/RockPaperScissors_Game",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 71,
+    "day": 61
+  },
+  {
+    "slug": "zip-file-extractor",
+    "title": "Zip File Extractor",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Extract_zip_files",
+    "theme": "fichiers",
+    "difficulty": 2,
+    "source_rank": 72,
+    "day": 62
+  },
+  {
+    "slug": "script-to-perform-geocoding",
+    "title": "Script to perform Geocoding",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Geocoding",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 74,
+    "day": 63
+  },
+  {
+    "slug": "python-carbon-clips",
+    "title": "Python Carbon Clips",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Py_carbon_clips",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 75,
+    "day": 64
+  },
+  {
+    "slug": "qr-code-generator",
+    "title": "QR Code Generator",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Qr_code_generator",
+    "theme": "media",
+    "difficulty": 2,
+    "source_rank": 76,
+    "day": 65
+  },
+  {
+    "slug": "tic-tac-toe",
+    "title": "Tic Tac Toe",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Tic_tac_toe",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 78,
+    "day": 66
+  },
+  {
+    "slug": "tic-tac-toe-with-ai",
+    "title": "Tic Tac Toe with AI",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Tic_tac_toe_with_ai",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 79,
+    "day": 67
+  },
+  {
+    "slug": "quote-scrapper",
+    "title": "Quote Scrapper",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Scrape_quotes",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 81,
+    "day": 68
+  },
+  {
+    "slug": "time-to-load-website",
+    "title": "Time To Load Website",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Time_to_load_website",
+    "theme": "web",
+    "difficulty": 2,
+    "source_rank": 82,
+    "day": 69
+  },
+  {
+    "slug": "customer-loan-repayment-prediction",
+    "title": "Customer Loan Repayment Prediction",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/Notebooks/Customer_loan_repayment_problem",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 83,
+    "day": 70
+  },
+  {
+    "slug": "number-guessing-game",
+    "title": "Number Guessing Game",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Number_guessing_game",
+    "theme": "donnees",
+    "difficulty": 2,
+    "source_rank": 85,
+    "day": 71
+  },
+  {
+    "slug": "movie-information-scrapper",
+    "title": "Movie Information Scrapper",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Movie%20Information%20Scraper",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 87,
+    "day": 72
+  },
+  {
+    "slug": "fetch-http-status-code",
+    "title": "Fetch HTTP Status Code",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Fetch%20HTTP%20status%20code",
+    "theme": "web",
+    "difficulty": 2,
+    "source_rank": 88,
+    "day": 73
+  },
+  {
+    "slug": "check-leap-year",
+    "title": "Check Leap Year",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Leap_Year_Checker",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 89,
+    "day": 74
+  },
+  {
+    "slug": "hackernews-scrapper",
+    "title": "HackerNews Scrapper",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Scrape_Hacker_News",
+    "theme": "web",
+    "difficulty": 2,
+    "source_rank": 91,
+    "day": 75
+  },
+  {
+    "slug": "unstructured-supplemenrary-service-data",
+    "title": "Unstructured Supplemenrary Service Data",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Unstructured%20Supplemenrary%20%20Service%20Data",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 96,
+    "day": 76
+  },
+  {
+    "slug": "duplicate-files-remover",
+    "title": "Duplicate Files remover",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Duplicate%20files%20remover",
+    "theme": "fichiers",
+    "difficulty": 2,
+    "source_rank": 97,
+    "day": 77
+  },
+  {
+    "slug": "find-imdb-ratings",
+    "title": "Find IMDB Ratings",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Find_imdb_rating",
+    "theme": "web",
+    "difficulty": 2,
+    "source_rank": 99,
+    "day": 78
+  },
+  {
+    "slug": "terminal-based-hangman-game",
+    "title": "Terminal Based Hangman Game",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Terminal_Based_Hangman_Game",
+    "theme": "divers",
+    "difficulty": 2,
+    "source_rank": 100,
+    "day": 79
+  },
+  {
+    "slug": "zip-bruter",
+    "title": "Zip Bruter",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Zip_Bruter",
+    "theme": "fichiers",
+    "difficulty": 2,
+    "source_rank": 102,
+    "day": 80
+  },
+  {
+    "slug": "add-watermark-on-images",
+    "title": "Add Watermark on Images",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Image_watermark",
+    "theme": "media",
+    "difficulty": 3,
+    "source_rank": 8,
+    "day": 81
+  },
+  {
+    "slug": "download-bulk-images",
+    "title": "Download bulk images",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Download_images_from_website",
+    "theme": "media",
+    "difficulty": 3,
+    "source_rank": 11,
+    "day": 82
+  },
+  {
+    "slug": "send-emails",
+    "title": "Send emails",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Send_email_from_csv",
+    "theme": "automatisation",
+    "difficulty": 3,
+    "source_rank": 18,
+    "day": 83
+  },
+  {
+    "slug": "captures-frames-from-video",
+    "title": "Captures Frames from video",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Capture_Video_Frames",
+    "theme": "media",
+    "difficulty": 3,
+    "source_rank": 22,
+    "day": 84
+  },
+  {
+    "slug": "encrypt-and-decrypt-text",
+    "title": "Encrypt and decrypt text",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Encrypt_and_decrypt_text",
+    "theme": "securite",
+    "difficulty": 3,
+    "source_rank": 26,
+    "day": 85
+  },
+  {
+    "slug": "encrypt-file-and-folders",
+    "title": "Encrypt file and folders",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Create_a_script_to_encrypt_files_and_folder",
+    "theme": "securite",
+    "difficulty": 3,
+    "source_rank": 29,
+    "day": 86
+  },
+  {
+    "slug": "scrape-youtube-video-comment",
+    "title": "Scrape Youtube video comment",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Web_scraping_a_youtube_comment",
+    "theme": "media",
+    "difficulty": 3,
+    "source_rank": 40,
+    "day": 87
+  },
+  {
+    "slug": "split-video-using-timeperiod",
+    "title": "Split video using timeperiod",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Split_a_video_file_by_given_time_period",
+    "theme": "media",
+    "difficulty": 3,
+    "source_rank": 51,
+    "day": 88
+  },
+  {
+    "slug": "merge-pdf-files",
+    "title": "Merge Pdf Files",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Merge_pdfs",
+    "theme": "media",
+    "difficulty": 3,
+    "source_rank": 57,
+    "day": 89
+  },
+  {
+    "slug": "covert-image-to-pdf",
+    "title": "Covert Image To Pdf",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Convert_a_image_to_pdf",
+    "theme": "media",
+    "difficulty": 3,
+    "source_rank": 63,
+    "day": 90
+  },
+  {
+    "slug": "store-emails-in-csv-file",
+    "title": "Store emails in csv file",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Store_emails_in_csv",
+    "theme": "automatisation",
+    "difficulty": 3,
+    "source_rank": 64,
+    "day": 91
+  },
+  {
+    "slug": "xkcd-comics-downloader",
+    "title": "XKCD Comics Downloader",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/XKCD_downloader",
+    "theme": "web",
+    "difficulty": 3,
+    "source_rank": 66,
+    "day": 92
+  },
+  {
+    "slug": "news-website-scraper",
+    "title": "News Website Scraper",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/News_website_scraper",
+    "theme": "web",
+    "difficulty": 3,
+    "source_rank": 70,
+    "day": 93
+  },
+  {
+    "slug": "scrape-medium-articles",
+    "title": "Scrape Medium Articles",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Scraping%20Medium%20Articles",
+    "theme": "web",
+    "difficulty": 3,
+    "source_rank": 90,
+    "day": 94
+  },
+  {
+    "slug": "easy-video-player",
+    "title": "Easy Video Player",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/EasyVideoPlayer",
+    "theme": "media",
+    "difficulty": 3,
+    "source_rank": 93,
+    "day": 95
+  },
+  {
+    "slug": "geeksforgeeks-article-downloader",
+    "title": "GeeksforGeeks Article downloader",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/download%20GeeksForGeeks%20articles",
+    "theme": "web",
+    "difficulty": 3,
+    "source_rank": 94,
+    "day": 96
+  },
+  {
+    "slug": "pdf-to-text",
+    "title": "PDF to Text",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/convert%20pdf%20to%20text",
+    "theme": "media",
+    "difficulty": 3,
+    "source_rank": 95,
+    "day": 97
+  },
+  {
+    "slug": "todo-app-with-flask",
+    "title": "Todo App With Flask",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Todo_app",
+    "theme": "framework",
+    "difficulty": 4,
+    "source_rank": 7,
+    "day": 98
+  },
+  {
+    "slug": "wishlist-app-using-django",
+    "title": "WishList App Using Django",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/WishList",
+    "theme": "framework",
+    "difficulty": 4,
+    "source_rank": 9,
+    "day": 99
+  },
+  {
+    "slug": "digital-clock-using-tkinter",
+    "title": "Digital clock using tkinter",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/Digital_clock",
+    "theme": "framework",
+    "difficulty": 4,
+    "source_rank": 62,
+    "day": 100
+  },
+  {
+    "slug": "whatsapp-bot",
+    "title": "Whatsapp Bot",
+    "source_url": "https://github.com/Python-World/python-mini-projects/tree/master/projects/whatsapp_Bot",
+    "theme": "automatisation",
+    "difficulty": 4,
+    "source_rank": 101,
+    "day": 101
+  }
+]

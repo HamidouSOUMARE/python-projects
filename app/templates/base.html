@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Coach Python{% endblock %}</title>
+  <link rel="stylesheet" href="/static/tokens.css">
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="site-header__inner">
+      <a class="brand" href="/">Coach Python</a>
+      <nav class="nav" aria-label="Navigation principale">
+        <a href="/">Tableau de bord</a>
+        <a href="/catalogue">Catalogue</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="layout">
+    {% if not llm_ready %}
+      <div class="flash flash--error" role="alert">
+        Aucune cle API Anthropic detectee. Copie <code>.env.example</code> vers <code>.env</code>
+        et renseigne <code>ANTHROPIC_API_KEY</code> : sans elle, le client ne peut ni valider ta
+        comprehension ni noter ton code.
+      </div>
+    {% endif %}
+
+    {% if flash %}
+      <div class="flash flash--{{ flash.kind }}" role="status">{{ flash.text }}</div>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

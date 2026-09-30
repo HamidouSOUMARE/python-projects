@@ -1,0 +1,155 @@
+/* Design tokens. Aucune valeur brute ne doit apparaitre ailleurs que dans ce fichier. */
+
+:root {
+  /* Couleurs primitives */
+  --slate-50: #f8fafc;
+  --slate-100: #f1f5f9;
+  --slate-200: #e2e8f0;
+  --slate-300: #cbd5e1;
+  --slate-500: #64748b;
+  --slate-600: #475569;
+  --slate-700: #334155;
+  --slate-800: #1e293b;
+  --slate-900: #0f172a;
+  --slate-950: #060b16;
+
+  --indigo-400: #818cf8;
+  --indigo-500: #6366f1;
+  --indigo-600: #4f46e5;
+  --indigo-050: #eef2ff;
+
+  --green-050: #ecfdf5;
+  --green-400: #34d399;
+  --green-600: #059669;
+  --green-700: #047857;
+
+  --amber-050: #fffbeb;
+  --amber-400: #fbbf24;
+  --amber-600: #d97706;
+  --amber-700: #b45309;
+
+  --red-050: #fef2f2;
+  --red-400: #f87171;
+  --red-600: #dc2626;
+  --red-700: #b91c1c;
+
+  /* Couleurs semantiques - theme clair */
+  --color-bg: var(--slate-50);
+  --color-surface: #ffffff;
+  --color-surface-sunken: var(--slate-100);
+  --color-border: var(--slate-200);
+  --color-border-strong: var(--slate-300);
+  --color-text: var(--slate-900);
+  --color-text-muted: var(--slate-600);
+  --color-text-faint: var(--slate-500);
+
+  --color-accent: var(--indigo-600);
+  --color-accent-hover: var(--indigo-500);
+  --color-accent-soft: var(--indigo-050);
+  --color-on-accent: #ffffff;
+
+  --color-success: var(--green-700);
+  --color-success-soft: var(--green-050);
+  --color-warning: var(--amber-700);
+  --color-warning-soft: var(--amber-050);
+  --color-danger: var(--red-700);
+  --color-danger-soft: var(--red-050);
+
+  --color-code-bg: var(--slate-100);
+
+  /* Espacements - echelle de 4px */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+
+  /* Typographie */
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "JetBrains Mono", Consolas, monospace;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.375rem;
+  --text-2xl: 1.75rem;
+  --text-3xl: 2.25rem;
+  --leading-tight: 1.25;
+  --leading-normal: 1.6;
+  --weight-normal: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+
+  /* Formes et profondeur */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-pill: 999px;
+  --border-width: 1px;
+  --shadow-sm: 0 1px 2px rgb(15 23 42 / 6%);
+  --shadow-md: 0 4px 12px rgb(15 23 42 / 8%);
+  --focus-ring: 0 0 0 3px rgb(99 102 241 / 45%);
+
+  /* Mise en page */
+  --layout-max: 68rem;
+  --layout-gutter: var(--space-4);
+  --transition-fast: 120ms ease;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --color-bg: var(--slate-950);
+    --color-surface: var(--slate-900);
+    --color-surface-sunken: var(--slate-800);
+    --color-border: var(--slate-800);
+    --color-border-strong: var(--slate-700);
+    --color-text: var(--slate-100);
+    --color-text-muted: var(--slate-300);
+    --color-text-faint: var(--slate-500);
+
+    --color-accent: var(--indigo-400);
+    --color-accent-hover: var(--indigo-500);
+    --color-accent-soft: rgb(99 102 241 / 16%);
+    --color-on-accent: var(--slate-950);
+
+    --color-success: var(--green-400);
+    --color-success-soft: rgb(52 211 153 / 14%);
+    --color-warning: var(--amber-400);
+    --color-warning-soft: rgb(251 191 36 / 14%);
+    --color-danger: var(--red-400);
+    --color-danger-soft: rgb(248 113 113 / 14%);
+
+    --color-code-bg: var(--slate-800);
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 40%);
+    --shadow-md: 0 4px 14px rgb(0 0 0 / 45%);
+  }
+}
+
+:root[data-theme="dark"] {
+  --color-bg: var(--slate-950);
+  --color-surface: var(--slate-900);
+  --color-surface-sunken: var(--slate-800);
+  --color-border: var(--slate-800);
+  --color-border-strong: var(--slate-700);
+  --color-text: var(--slate-100);
+  --color-text-muted: var(--slate-300);
+  --color-text-faint: var(--slate-500);
+
+  --color-accent: var(--indigo-400);
+  --color-accent-hover: var(--indigo-500);
+  --color-accent-soft: rgb(99 102 241 / 16%);
+  --color-on-accent: var(--slate-950);
+
+  --color-success: var(--green-400);
+  --color-success-soft: rgb(52 211 153 / 14%);
+  --color-warning: var(--amber-400);
+  --color-warning-soft: rgb(251 191 36 / 14%);
+  --color-danger: var(--red-400);
+  --color-danger-soft: rgb(248 113 113 / 14%);
+
+  --color-code-bg: var(--slate-800);
+}

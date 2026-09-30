@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Catalogue - Coach Python{% endblock %}
+
+{% block content %}
+<div class="stack">
+  <div>
+    <h1>Catalogue</h1>
+    <p class="muted">
+      {{ projects | length }} projets, ordonnes du plus simple au plus complexe. Tu peux prendre
+      n'importe lequel, mais l'ordre est pense comme une progression.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Jour</th><th>Projet</th><th>Theme</th><th>Niveau</th>
+            <th>Versions</th><th>Meilleure note</th><th>Etat</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for project in projects %}
+            <tr>
+              <td>{{ '%02d' % project.day }}</td>
+              <td class="wrap"><a href="/projet/{{ project.id }}">{{ project.title }}</a></td>
+              <td>{{ project.theme }}</td>
+              <td>{{ project.difficulty }}/4</td>
+              <td>{{ project.attempts_count or '—' }}</td>
+              <td>{{ project.best_score if project.best_score is not none else '—' }}</td>
+              <td>
+                {% if project.status %}
+                  {% set state = Status(project.status) %}
+                  <span class="badge {{ 'badge--success' if state == Status.VALIDATED else 'badge--warning' if state == Status.REVIEWED else '' }}">
+                    {{ status_labels[state] }}
+                  </span>
+                {% else %}
+                  <span class="badge">a demarrer</span>
+                {% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

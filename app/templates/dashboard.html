@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% block title %}Tableau de bord - Coach Python{% endblock %}
+
+{% block content %}
+<div class="stack">
+
+  <div>
+    <h1>Un projet par jour</h1>
+    <p class="muted">
+      Comprendre le besoin avant de coder, etre note apres, refaire jusqu'a la note visee.
+    </p>
+  </div>
+
+  <section class="stats" aria-label="Progression">
+    <div class="stat">
+      <div class="stat__value">{{ progress.validated }}<span class="muted"> / {{ progress.total }}</span></div>
+      <div class="stat__label">Projets valides</div>
+    </div>
+    <div class="stat">
+      <div class="stat__value">{{ progress.streak }}</div>
+      <div class="stat__label">Jours d'affilee</div>
+    </div>
+    <div class="stat">
+      <div class="stat__value">{{ progress.average if progress.average is not none else '—' }}</div>
+      <div class="stat__label">Note moyenne</div>
+    </div>
+    <div class="stat">
+      <div class="stat__value">{{ progress.iterations }}</div>
+      <div class="stat__label">Iterations notees</div>
+    </div>
+    <div class="stat">
+      <div class="stat__value">{{ progress.hints_used }}</div>
+      <div class="stat__label">Indices consommes</div>
+    </div>
+  </section>
+
+  <div class="card">
+    <div class="card__eyebrow">Avancement du parcours</div>
+    <div class="progress-bar" role="img"
+         aria-label="{{ progress.percent }} % du parcours valide">
+      <div class="progress-bar__fill" style="width: {{ progress.percent }}%"></div>
+    </div>
+    <p class="muted" style="margin-top: var(--space-2)">{{ progress.percent }} % du parcours</p>
+  </div>
+
+  {% if current %}
+    <section class="card card--accent">
+      <div class="card__eyebrow">Projet du jour — jour {{ '%02d' % current.day }}</div>
+      <h2>{{ current.title }}</h2>
+      <div class="cluster">
+        <span class="badge badge--accent">{{ current.theme }}</span>
+        <span class="badge">difficulte {{ current.difficulty }}/4</span>
+      </div>
+      <p style="margin-top: var(--space-4)">
+        <a class="button" href="/projet/{{ current.id }}">Ouvrir le projet</a>
+      </p>
+    </section>
+  {% else %}
+    <section class="card card--accent">
+      <h2>Parcours termine</h2>
+      <p class="muted">Les {{ progress.total }} projets du catalogue sont valides.</p>
+    </section>
+  {% endif %}
+
+  {% if progress.trend %}
+    <section class="card">
+      <div class="card__eyebrow">Dernieres notes</div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Jour</th><th>Projet</th><th>Version</th><th>Note</th></tr>
+          </thead>
+          <tbody>
+            {% for item in progress.trend %}
+              <tr>
+                <td>{{ '%02d' % item.day }}</td>
+                <td class="wrap">{{ item.title }}</td>
+                <td>v{{ item.attempt_no }}</td>
+                <td><strong>{{ item.total }}</strong>/20</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  {% endif %}
+
+  <section class="card">
+    <div class="card__eyebrow">Les dix prochains projets</div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Jour</th><th>Projet</th><th>Theme</th><th>Niveau</th><th>Etat</th></tr>
+        </thead>
+        <tbody>
+          {% for project in projects if project.status != 'validated' %}
+            {% if loop.index <= 10 %}
+              <tr>
+                <td>{{ '%02d' % project.day }}</td>
+                <td class="wrap"><a href="/projet/{{ project.id }}">{{ project.title }}</a></td>
+                <td>{{ project.theme }}</td>
+                <td>{{ project.difficulty }}/4</td>
+                <td>
+                  {% if project.status %}
+                    <span class="badge">{{ status_labels[Status(project.status)] }}</span>
+                  {% else %}
+                    <span class="badge">a demarrer</span>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</div>
+{% endblock %}

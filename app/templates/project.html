@@ -1,0 +1,321 @@
+{% extends "base.html" %}
+{% block title %}Jour {{ '%02d' % project.day }} - {{ project.title }}{% endblock %}
+
+{% set has_brief = brief is not none %}
+{% set understanding_ok = validated_understanding is not none %}
+{% set is_coding = status == Status.CODING %}
+{% set is_reviewed = status == Status.REVIEWED %}
+{% set is_validated = status == Status.VALIDATED %}
+{% set last_understanding = understandings[-1] if understandings else none %}
+
+{% block content %}
+<div class="stack">
+
+  <div>
+    <p class="muted" style="margin-bottom: var(--space-1)">
+      <a href="/">Tableau de bord</a> / jour {{ '%02d' % project.day }}
+    </p>
+    <h1>{{ project.title }}</h1>
+    <div class="cluster">
+      <span class="badge badge--accent">{{ project.theme }}</span>
+      <span class="badge">difficulte {{ project.difficulty }}/4</span>
+      {% if status %}
+        <span class="badge {{ 'badge--success' if is_validated else 'badge--warning' if is_reviewed else '' }}">
+          {{ status_labels[status] }}
+        </span>
+      {% endif %}
+      {% if attempt %}<span class="badge">version {{ attempt.attempt_no }}</span>{% endif %}
+    </div>
+  </div>
+
+  {# ------------------------------------------------------------------ #}
+  {# Etape 1 : le brief client                                          #}
+  {# ------------------------------------------------------------------ #}
+  <section class="step {{ 'step--done' if has_brief else 'step--active' }}">
+    <div class="step__header">
+      <span class="step__number">1</span>
+      <h2 class="step__title">Le besoin client</h2>
+      {% if has_brief %}<span class="badge">{{ brief.client_name }}</span>{% endif %}
+    </div>
+    <div class="step__body">
+      {% if has_brief %}
+        <div class="card__eyebrow">Contexte</div>
+        {{ brief.context_md | md | safe }}
+        <div class="card__eyebrow" style="margin-top: var(--space-4)">Besoin exprime</div>
+        {{ brief.need_md | md | safe }}
+        <div class="card__eyebrow" style="margin-top: var(--space-4)">Contraintes</div>
+        <ul class="feedback-list">
+          {% for item in brief.constraints %}<li>{{ item }}</li>{% endfor %}
+        </ul>
+        <p class="muted">
+          Les criteres d'acceptation du client restent volontairement caches : c'est ta
+          reformulation qui doit les faire apparaitre.
+        </p>
+      {% else %}
+        <p class="field__hint">
+          Le client va formuler son besoin comme en vraie mission : un contexte, un probleme,
+          des contraintes. Aucune indication technique.
+        </p>
+        <form method="post" action="/projet/{{ project.id }}/brief">
+          <button class="button" type="submit" {{ 'disabled' if not llm_ready }}>
+            Recevoir le brief
+          </button>
+        </form>
+      {% endif %}
+    </div>
+  </section>
+
+  {# ------------------------------------------------------------------ #}
+  {# Etape 2 : comprehension du besoin                                  #}
+  {# ------------------------------------------------------------------ #}
+  <section class="step {{ 'step--locked' if not has_brief else 'step--done' if understanding_ok else 'step--active' }}"
+           id="comprehension">
+    <div class="step__header">
+      <span class="step__number">2</span>
+      <h2 class="step__title">Ta comprehension du besoin</h2>
+      {% if last_understanding %}
+        <span class="badge {{ 'badge--success' if understanding_ok else 'badge--warning' }}">
+          couverture {{ last_understanding.coverage }} %
+        </span>
+      {% endif %}
+    </div>
+    <div class="step__body">
+      {% if not has_brief %}
+        <p class="muted">Recois d'abord le brief.</p>
+
+      {% else %}
+        {% for item in understandings %}
+          <article class="card" style="margin-bottom: var(--space-4)">
+            <div class="card__eyebrow">
+              Envoi {{ loop.index }} —
+              {{ 'valide' if item.verdict == 'valide' else 'a preciser' }}
+            </div>
+            <p style="white-space: pre-wrap">{{ item.body }}</p>
+            <hr class="divider">
+            <div class="card__eyebrow">Reponse du client</div>
+            {{ item.summary_md | md | safe }}
+
+            {% if item.confirmed %}
+              <div class="card__eyebrow" style="margin-top: var(--space-4)">Bien compris</div>
+              <ul class="feedback-list feedback-list--ok">
+                {% for point in item.confirmed %}<li>{{ point }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+
+            {% if item.gaps %}
+              <div class="card__eyebrow">Ce que le client releve</div>
+              <ul class="feedback-list feedback-list--gap">
+                {% for gap in item.gaps %}
+                  <li>
+                    <strong>{{ gap.point }}</strong>
+                    <span class="feedback-list__relance">{{ gap.relance }}</span>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+            {% if item.offtrack %}
+              <div class="card__eyebrow">Hors perimetre</div>
+              <ul class="feedback-list feedback-list--gap">
+                {% for point in item.offtrack %}<li>{{ point }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </article>
+        {% endfor %}
+
+        {% if not understanding_ok %}
+          <form method="post" action="/projet/{{ project.id }}/comprehension">
+            <p class="field__hint">
+              Reformule le besoin avec tes mots : ce que le client veut obtenir, pour qui, les
+              contraintes, et les cas particuliers que tu anticipes. Tu ne peux pas passer a la
+              realisation avant que le client valide.
+            </p>
+            <label class="field__hint" for="body">Ta reformulation</label>
+            <textarea id="body" name="body" required minlength="80"
+                      placeholder="Ce que je comprends, c'est que vous voulez..."></textarea>
+            <p style="margin-top: var(--space-4)">
+              <button class="button" type="submit" {{ 'disabled' if not llm_ready }}>
+                Soumettre au client
+              </button>
+            </p>
+          </form>
+        {% endif %}
+      {% endif %}
+    </div>
+  </section>
+
+  {# ------------------------------------------------------------------ #}
+  {# Etape 3 : realisation                                              #}
+  {# ------------------------------------------------------------------ #}
+  <section class="step {{ 'step--locked' if not understanding_ok else 'step--active' if is_coding else 'step--done' }}"
+           id="indices">
+    <div class="step__header">
+      <span class="step__number">3</span>
+      <h2 class="step__title">Realisation</h2>
+      {% if hints %}<span class="badge badge--warning">{{ hints | length }} indice(s)</span>{% endif %}
+    </div>
+    <div class="step__body">
+      {% if not understanding_ok %}
+        <p class="muted">Le chantier s'ouvre quand le client a valide ta comprehension.</p>
+
+      {% else %}
+        <p>Ecris ton code dans ce dossier :</p>
+        <p><span class="path">{{ directory }}</span></p>
+
+        {% if previous_axes %}
+          <div class="card" style="margin: var(--space-5) 0">
+            <div class="card__eyebrow">Axes a traiter dans cette version</div>
+            {% for axis in previous_axes %}
+              <div class="axis">
+                <div class="axis__title">{{ loop.index }}. {{ axis.titre }}</div>
+                <p class="axis__line"><strong>Pourquoi</strong> {{ axis.pourquoi }}</p>
+                <p class="axis__line"><strong>Comment</strong> {{ axis.comment }}</p>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% set sources = files | default([]) %}
+        {% if sources %}
+          <div class="card__eyebrow" style="margin-top: var(--space-4)">Fichiers detectes</div>
+          <div class="cluster">
+            {% for source in sources %}<span class="badge">{{ source.path }}</span>{% endfor %}
+          </div>
+        {% else %}
+          <p class="muted">Aucun fichier source pour l'instant.</p>
+        {% endif %}
+
+        <hr class="divider">
+
+        <div class="card__eyebrow">Indices</div>
+        {% for hint in hints %}
+          <div class="hint">
+            <div class="hint__label">
+              Palier {{ hint.level }} — {{ hint_labels[hint.level] }}
+              (-{{ hint_penalties[hint.level - 1] }} point)
+            </div>
+            {{ hint.content_md | md | safe }}
+          </div>
+        {% endfor %}
+
+        {% if is_coding %}
+          {% set next_level = (hints | length) + 1 %}
+          {% if next_level <= 3 %}
+            <p class="field__hint">
+              Palier suivant : {{ hint_labels[next_level] }}, facture
+              {{ hint_penalties[next_level - 1] }} point sur la note finale.
+            </p>
+            <form method="post" action="/projet/{{ project.id }}/indice">
+              <button class="button button--warning" type="submit" {{ 'disabled' if not llm_ready }}>
+                Demander un indice
+              </button>
+            </form>
+          {% else %}
+            <p class="muted">Les trois paliers sont consommes pour cette version.</p>
+          {% endif %}
+        {% endif %}
+      {% endif %}
+    </div>
+  </section>
+
+  {# ------------------------------------------------------------------ #}
+  {# Etape 4 : rendu et notation                                        #}
+  {# ------------------------------------------------------------------ #}
+  <section class="step {{ 'step--active' if is_coding else 'step--locked' if not understanding_ok else 'step--done' }}"
+           id="revue">
+    <div class="step__header">
+      <span class="step__number">4</span>
+      <h2 class="step__title">Rendu et notation</h2>
+      <span class="badge">seuil {{ threshold }}/20</span>
+    </div>
+    <div class="step__body">
+      {% if is_coding %}
+        <p class="field__hint">
+          Le rendu commite le dossier du projet, le pousse si un remote est configure, puis fait
+          noter le code sur les six criteres. Le compte rendu est ecrit a cote de ton code.
+        </p>
+        <form method="post" action="/projet/{{ project.id }}/rendu">
+          <button class="button" type="submit" {{ 'disabled' if not llm_ready }}>
+            Rendre et faire noter
+          </button>
+        </form>
+
+      {% elif review %}
+        <div class="score-hero">
+          <span class="score-hero__value">{{ review.total }}<span class="muted">/20</span></span>
+          <span class="badge {{ 'badge--success' if review.passed else 'badge--warning' }}">
+            {{ review.appreciation }}
+          </span>
+        </div>
+        <p class="muted">
+          Note brute {{ review.raw_total }}/20, malus indices −{{ review.penalty }}.
+          {% if review.commit_sha %}Commit <code>{{ review.commit_sha }}</code>.{% endif %}
+        </p>
+
+        {{ review.summary_md | md | safe }}
+
+        <hr class="divider">
+        <div class="card__eyebrow">Grille de notation</div>
+        <div class="criteria">
+          {% for criterion in criteria %}
+            {% set entry = review.scores.get(criterion.key, {}) %}
+            <div class="criterion">
+              <span class="criterion__label">
+                {{ criterion.label }}
+                <span class="muted">({{ (criterion.weight * 100) | round | int }} %)</span>
+              </span>
+              <span class="criterion__score">{{ entry.get('score', '—') }}/20</span>
+              <div class="criterion__meter">
+                <div class="criterion__meter-fill"
+                     style="width: {{ (entry.get('score', 0) / 20 * 100) | round | int }}%"></div>
+              </div>
+              <span class="criterion__note">{{ entry.get('justification', '') }}</span>
+            </div>
+          {% endfor %}
+        </div>
+
+        {% if review.strengths %}
+          <hr class="divider">
+          <div class="card__eyebrow">Points forts</div>
+          <ul class="feedback-list feedback-list--ok">
+            {% for item in review.strengths %}<li>{{ item }}</li>{% endfor %}
+          </ul>
+        {% endif %}
+
+        {% if review.axes %}
+          <hr class="divider">
+          <div class="card__eyebrow">Axes d'amelioration</div>
+          {% for axis in review.axes %}
+            <div class="axis">
+              <div class="axis__title">
+                {{ loop.index }}. {{ axis.titre }}
+                <span class="badge">priorite {{ axis.priorite }}</span>
+              </div>
+              <p class="axis__line"><strong>Pourquoi</strong> {{ axis.pourquoi }}</p>
+              <p class="axis__line"><strong>Comment</strong> {{ axis.comment }}</p>
+            </div>
+          {% endfor %}
+        {% endif %}
+
+        <hr class="divider">
+        {% if is_validated %}
+          <p><strong>Projet valide.</strong> Le suivant t'attend sur le tableau de bord.</p>
+          <a class="button" href="/">Passer au projet suivant</a>
+        {% else %}
+          <p>
+            Sous le seuil de {{ threshold }}/20. Ouvre une nouvelle version : le besoin reste
+            valide, les axes ci-dessus deviennent ton cahier des charges.
+          </p>
+          <form method="post" action="/projet/{{ project.id }}/iteration">
+            <button class="button" type="submit">Ouvrir la version {{ attempt.attempt_no + 1 }}</button>
+          </form>
+        {% endif %}
+
+      {% else %}
+        <p class="muted">Rien a noter pour l'instant.</p>
+      {% endif %}
+    </div>
+  </section>
+
+</div>
+{% endblock %}
