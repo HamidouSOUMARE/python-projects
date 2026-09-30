@@ -1,0 +1,1 @@
+print("Bonjour à tous les apprentis et bienvenu !")
